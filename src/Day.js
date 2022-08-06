@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { useState } from "react";
-export default function Day({weekday, selectedDay, setSelectedDays}){
+export default function Day(props){
+const {weekday, selectedDay, setSelectedDays,habitName}= props;
 
-    const [selected,setSelected]= useState(false);
+const [selected,setSelected]= useState(false);
     
     function save(weekday){
                
         if(selected === false){
             setSelected(!selected)
             setSelectedDays([...selectedDay, weekday.dayID]);
-            console.log(selectedDay);
         }else{
             setSelected(!selected);
             const novoarray = selectedDay.filter(value => value !== weekday.dayID);
@@ -18,12 +18,13 @@ export default function Day({weekday, selectedDay, setSelectedDays}){
         }      
     }       
     return(
-        <Weekday  selected={selected} key={weekday.dayID} onClick={()=>save(weekday)}>{weekday.day}</Weekday>
-
+        <>
+         <Weekday  selected={selected} key={weekday.dayID} onClick={()=>save(weekday)}>{weekday.day}</Weekday>
+        </>
     )
 }
 
-const Weekday =styled.li`
+const Weekday =styled.div`
 background: #FFFFFF;
 border: 1px solid ${props => props.selected ? '#ffffff' : '#dbdbdb'};
 border-radius: 5px;
@@ -32,6 +33,7 @@ margin-right: 10px;
 width: 30px;
 height: 30px;
 display: flex;
+flex-direction: row;
 justify-content: center;
 align-items: center;
 color: ${props => props.selected ? '#ffffff' : '#dbdbdb'};

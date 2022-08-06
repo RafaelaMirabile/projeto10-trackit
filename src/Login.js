@@ -31,7 +31,7 @@ export default function Login(){
            const {image, token}= data;
            setUserProfilePicture(image);
            setUserToken(token);
-           navigate('/hoje')
+           navigate('/habitos')
         }
       
         );
@@ -43,7 +43,6 @@ export default function Login(){
 
     function FormsState(){
         if(InputDisable){
-
             return(
                 <Forms disabled>
                     <input placeholder="email" type="text" required value={email} ></input>
