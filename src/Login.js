@@ -3,7 +3,8 @@ import { Link, useNavigate} from "react-router-dom"
 import axios from "axios";
 import UserContext from "./UserContext";
 import styled from "styled-components";
-import { ThreeDots } from  'react-loader-spinner';
+import { ThreeDots } from "react-loader-spinner";
+
 
 
 export default function Login(){
@@ -20,6 +21,7 @@ export default function Login(){
     
     function loginStatus(e){
         e.preventDefault();
+        setInputDisable(true);
 
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',{
             email,
@@ -31,13 +33,16 @@ export default function Login(){
            const {image, token}= data;
            setUserProfilePicture(image);
            setUserToken(token);
-           navigate('/habitos')
+           navigate('/habitos');
+           
         }
       
         );
         promise.catch(() => {
             alert('Usuário ou a senha incorretos');
             setInputDisable(false);
+            setUserEmail('');
+            setUserPassword('');
         });
     } 
 
@@ -46,8 +51,8 @@ export default function Login(){
             return(
                 <Forms disabled>
                     <input placeholder="email" type="text" required value={email} ></input>
-                    <input placeholder="senha" type="text" required value={password}></input>
-                    <button type="submit" disabled><ThreeDots color="#FFFFFF" height={20} width={50} /></button>
+                    <input  placeholder="senha" type="text" required value={password}></input>
+                    <button><ThreeDots color="#FFFFFF" height={20} width={50}/></button>
                 </Forms>
                 )
         }
@@ -58,16 +63,13 @@ export default function Login(){
                     <input required type="password" placeholder="senha" value={password} onChange={(e) => setUserPassword(e.target.value)} ></input>
                     <button type="submit">Entrar</button>
                 </Forms>
-
             )
         }
     }
 
     const forms= FormsState();
    
-    return(
-    
-        
+    return(      
         <FormContainer>
             {forms}
             <SignUpLink to ="/cadastro">Não tem uma conta? Cadastre-se!</SignUpLink>
@@ -81,12 +83,10 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border: 2px solid green;
 `
 const Forms =styled.form`
 display: flex;
 flex-direction: column;
-border: 2px solid purple;
 margin-bottom: 16px;
 
 input{
@@ -116,6 +116,9 @@ button{
     text-align: center;
     color: #FFFFFF;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 `
 const SignUpLink = styled(Link)`

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function SignUp(){
 
@@ -12,10 +13,12 @@ export default function SignUp(){
     const[password, setUserPassword]= useState("");
     const[name, setUserName]= useState("");
     const[image, setUserProfilePic]= useState("");
+    const[InputsDisable, setInputsDisable]= useState(false);
 
     function userRegistration(e){
         
         e.preventDefault();
+        setInputsDisable(true);
         
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',
         {
@@ -29,18 +32,47 @@ export default function SignUp(){
          navigate('/')
         );
         
-        promise.catch((err) => console.log(err));
+        promise.catch((err) => {
+         console.log(err)
+         setInputsDisable(false);
+        alert("Houve algum erro durante o cadastro :( Confira se os dados estão preenchidos corretamente.");
+        setUserEmail('');
+        setUserName('');
+        setUserPassword('');
+        setUserProfilePic('');
+
+        });
     }
+
+    function FormsState(){
+        if(InputsDisable){
+            return(
+                <Forms disable>
+                <input placeholder="email" type="text" required value={email} onChange={e => setUserEmail(e.target.value)}></input>
+                <input placeholder="senha" type="text" required value={password} onChange={e => setUserPassword(e.target.value)}></input>
+                <input placeholder="nome" type="text" required value={name} onChange={e => setUserName(e.target.value)}></input>
+                <input placeholder="foto" type="text" required value={image} onChange={e => setUserProfilePic(e.target.value)}></input>
+                <button type="submit"> <ThreeDots color="#FFFFFF" height={20} width={50}/></button>
+            </Forms>
+            )
+        } else{
+            return(
+                <Forms onSubmit={userRegistration}>
+                <input placeholder="email" type="text" required value={email} onChange={e => setUserEmail(e.target.value)}></input>
+                <input placeholder="senha" type="text" required value={password} onChange={e => setUserPassword(e.target.value)}></input>
+                <input placeholder="nome" type="text" required value={name} onChange={e => setUserName(e.target.value)}></input>
+                <input placeholder="foto" type="text" required value={image} onChange={e => setUserProfilePic(e.target.value)}></input>
+                <button type="submit">Enviar</button>
+            </Forms>
+            )
+        }
+    }
+
+    const formsSignUp = FormsState()
     
     return(
         <FormContainer>
-            <Forms onSubmit={userRegistration}>
-                    <input placeholder="email" type="text" required value={email} onChange={e => setUserEmail(e.target.value)}></input>
-                    <input placeholder="senha" type="text" required value={password} onChange={e => setUserPassword(e.target.value)}></input>
-                    <input placeholder="nome" type="text" required value={name} onChange={e => setUserName(e.target.value)}></input>
-                    <input placeholder="foto" type="text" required value={image} onChange={e => setUserProfilePic(e.target.value)}></input>
-                    <button type="submit">enviar</button>
-                </Forms>
+            {formsSignUp}
             <SignInLink to ="/">Já tem uma conta? Faça login!</SignInLink>
         </FormContainer>
     )
@@ -52,13 +84,11 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border: 2px solid green;
 `
 const Forms =styled.form`
 display: flex;
 flex-direction: column;
 align-items: center;
-border: 2px solid purple;
 margin-bottom: 16px;
 
 input{
@@ -88,6 +118,9 @@ button{
     text-align: center;
     color: #FFFFFF;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 `
 const SignInLink = styled(Link)`
