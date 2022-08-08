@@ -51,6 +51,7 @@ export default function Hoje(){
         <HojeContainer>
             {topbar}
             <TodayUserHabitsContainer>
+
                 {arrTodayUserHabits.map((value,index)=> 
                     <HabitStatus 
                         index={index} 
@@ -60,6 +61,9 @@ export default function Hoje(){
                         highestSequence={value.highestSequence} 
                         status={value.done}
                     />)}
+
+
+
             </TodayUserHabitsContainer>
         </HojeContainer>
     )
@@ -105,32 +109,55 @@ function HabitStatus({habitName,currentSequence,highestSequence,status,habitID }
     }
     
     return(
+
+
             <TodayHabitBox>
-                <SequenceBox>
-                    <HabitName>{habitName}</HabitName>
-                    <Sequence state={done ? true : false}> <Info>Sequência atual: </Info>{current} {current > 1 ? 'dias' : 'dia' }</Sequence>
-                    <Record state={current === record && record !== 0 ? true : false}><Info>Seu recorde:</Info> {record} {record > 1 ? 'dias' : 'dia'}</Record>
-                </SequenceBox>
-                <CheckHabit state={done} onClick={()=>toggleStatus(habitID)}>
-                    <CheckmarkSharp
-                        color="#ffffff"
-                        height="35px"
-                        width="28px"
-                    />
-                </CheckHabit>
-            </TodayHabitBox>
+
+<SequenceBox>
+    <HabitName>{habitName}</HabitName>
+    <Sequence state={done ? true : false}> <Info>Sequência atual: </Info>{current} {current > 1 ? 'dias' : 'dia' }</Sequence>
+    <Record state={current === record && record !== 0 ? true : false}><Info>Seu recorde:</Info> {record} {record > 1 ? 'dias' : 'dia'}</Record>
+</SequenceBox>
+<CheckHabit state={done} onClick={()=>toggleStatus(habitID)}>
+    <CheckmarkSharp
+        color="#ffffff"
+        height="35px"
+        width="28px"
+    />
+</CheckHabit>
+
+
+
+</TodayHabitBox>
+
+
+
+            
         )
 
     }
 
+const TodayHabitBox =styled.div`
+border: 2px solid green;
+margin-bottom: 14px;
+display: flex;
+justify-content: space-between;
+width: 340px;
+height: 94px;
+background: #FFFFFF;
+border-radius: 5px;
+padding: 10px;
+`
+
 const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
-height: 400px;
+min-height: 400px;
 overflow-y: scroll;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
+
 `
 const TodayDate=styled.div`
 border: 2px solid orangered;
@@ -166,7 +193,6 @@ p{
 
 `
 
-
 const HojeContainer=styled.div`
 margin-top: 100px;
 border: 2px solid red;
@@ -186,17 +212,6 @@ const Info =styled.span`
 const Record = styled.p`
 font-size: 13px;
  color: ${props => props.state ? '#8fc549' : '#666666'};
-`
-const TodayHabitBox =styled.div`
-border: 2px solid green;
-margin-bottom: 14px;
-display: flex;
-justify-content: space-between;
-width: 340px;
-height: 94px;
-background: #FFFFFF;
-border-radius: 5px;
-padding: 10px;
 `
 
 const HabitName =styled.div`
