@@ -29,7 +29,6 @@ export default function Login(){
         });
 
         promise.then(({data})=>{
-            console.log(data);
            const {image, token}= data;
            setUserProfilePicture(image);
            setUserToken(token);

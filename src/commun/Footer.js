@@ -1,16 +1,28 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { CircularProgressbar} from "react-circular-progressbar"
+import 'react-circular-progressbar/dist/styles.css'
+import { useContext } from "react"
+import UserContext from "../UserContext"
+
 
 export default function Footer(){
+
+
+
     return(       
         <FooterContainer>
             <Content>
                 <NavbarLink to="/habitos">Hábitos</NavbarLink>
                 <NavbarLink to="/hoje">
-                    <DailyProgressbar>
-                        BolaProgresso
-                            
-                    </DailyProgressbar>
+                <Progressbar>
+                            <CircularProgressbar 
+                            background={true} 
+                            backgroundPadding={6}   
+                            text="Hoje"
+                           />
+                </Progressbar>
+               
                 </NavbarLink>
                 <NavbarLink to="/historico">Histórico</NavbarLink>
             </Content>
@@ -18,7 +30,35 @@ export default function Footer(){
     )
 }
 
-const FooterContainer=styled.footer`
+const Progressbar = styled.div`
+    margin-bottom: 100px;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .CircularProgressbar-path {
+        stroke: #FFFFFF;
+    }
+    .CircularProgressbar-trail {
+        stroke: #52B6FF;
+    }
+    .CircularProgressbar-text {
+        fill: #FFFFFF;
+
+    }
+    .CircularProgressbar-background {
+        fill: #52B6FF;
+    }
+
+`
+
+
+
+
+
+const FooterContainer=styled.div`
     position: fixed;
     bottom: 0;
     right: 0;
@@ -46,8 +86,3 @@ const NavbarLink = styled(Link) `
     color: #52B6FF;
 `
 
-const DailyProgressbar = styled.div `
-    margin-bottom: 40px;
-    height: 90px;
-    width: 90px;
-`

@@ -43,7 +43,8 @@ export default function Habitos(){
         setAreInputFieldsDisabled(true);
 
         if(selectedDay.length === 0){
-            alert("Selecione pelo menos uma dia da semana")
+            alert("Selecione pelo menos uma dia da semana");
+            setAreInputFieldsDisabled(false);
             return
         }
         
@@ -235,7 +236,7 @@ flex-direction: column;
 `
 const UserHabitList = styled.div`
 border: 2px solid purple;
-height: 230px;
+max-height: 330px;
 overflow-y: scroll;
 display: flex;
 flex-direction: column;
@@ -270,6 +271,7 @@ const HabitsContainer = styled.div`
 border: 2px solid green;
 margin-top: 100px;
 height: 430px;
+padding: 10px;
 `
 const AddHabits =styled.button`
 width: 40px;

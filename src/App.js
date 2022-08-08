@@ -3,6 +3,7 @@ import SignUpPage from "./SignUpPage"
 import { UserContextProvider } from "./UserContext"
 import GlobalStyle from "./globalStyles"
 import HabitosPage from "./HabitosPage"
+import HojePage from "./HojePage"
 import HomePage from "./HomePage"
 
 
@@ -16,6 +17,7 @@ export default function App(){
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/cadastro" element={<SignUpPage/>}/>
                     <Route path="/habitos" element={<HabitosPage/>}/>
+                    <Route path="/hoje" element={<HojePage/>}/>
                 </Routes>
             </BrowserRouter>
         </UserContextProvider>

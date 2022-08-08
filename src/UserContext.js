@@ -9,6 +9,7 @@ export function UserContextProvider({children}){
 
     const [userToken, setUserToken] = useState("");
     const [userProfilePicture, setUserProfilePicture] = useState("");
+   
 
     const locallyStoredToken = localStorage.getItem("token");
     const locallyStoredProfilePicture = localStorage.getItem("picture");
@@ -23,7 +24,7 @@ export function UserContextProvider({children}){
 
 
     return(
-        <UserContext.Provider value={{userToken, userProfilePicture, setUserToken, setUserProfilePicture}}>
+        <UserContext.Provider value={{userToken, userProfilePicture, setUserToken, setUserProfilePicture, }}>
         { children }
         </UserContext.Provider>
     )
