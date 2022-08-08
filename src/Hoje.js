@@ -125,7 +125,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-
+padding-bottom: 114px;
 `
 const TodayDate=styled.div`
 border: 2px solid orangered;
