@@ -7,7 +7,8 @@ import UserContext from "../UserContext"
 
 
 export default function Footer(){
-const{newcalPercentage,arrTodayUserHabits}= useContext(UserContext);
+
+    const{newcalPercentage,arrTodayUserHabits}= useContext(UserContext);
 
 function calcPercentage () {
     const progress = arrTodayUserHabits.filter(habit => habit.done).length;

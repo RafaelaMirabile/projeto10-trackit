@@ -6,22 +6,29 @@ import UserContext from "./UserContext";
 import { CheckmarkSharp } from "react-ionicons";
 import styled from "styled-components";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Hoje(){
 
     const{userToken, arrTodayUserHabits, setArrTodayUserHabits}=useContext(UserContext);
     const currentDate =dayjs().locale('pt-br').format("dddd, D/MM");
+    const[loading, setLoading]= useState(false);
 
     useEffect(()=>{
+        
+        
     
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
         headers: {Authorization : `Bearer ${userToken}`}    
         });
 
-        promise.then((response)=>
-        setArrTodayUserHabits(response.data)
+        promise.then((response)=>{
+            setArrTodayUserHabits(response.data);
+            setLoading(true);
 
-        );
+
+
+    });
         promise.catch(()=> console.error);           
     },[userToken, arrTodayUserHabits, setArrTodayUserHabits]);
 
@@ -46,29 +53,30 @@ export default function Hoje(){
     }
 
     const topbar = concludedHabits();
-  
+    
     return(
-        <HojeContainer>
-            {topbar}
-            <TodayUserHabitsContainer>
-
-                {arrTodayUserHabits.map((value,index)=> 
-                    <HabitStatus 
-                        index={index} 
-                        habitName={value.name}
-                        habitID={value.id}  
-                        currentSequence={value.currentSequence} 
-                        highestSequence={value.highestSequence} 
-                        status={value.done}
-                    />)}
-
-
-
-            </TodayUserHabitsContainer>
-        </HojeContainer>
+        <>  
+        {loading ?     <HojeContainer> 
+                            {topbar}
+                            <TodayUserHabitsContainer>
+                                {arrTodayUserHabits.map((value,index)=> 
+                                    <HabitStatus 
+                                        index={index} 
+                                        habitName={value.name}
+                                        habitID={value.id}  
+                                        currentSequence={value.currentSequence} 
+                                        highestSequence={value.highestSequence} 
+                                        status={value.done}
+                                        loading={loading}
+                                    />)}
+                            </TodayUserHabitsContainer>
+                        </HojeContainer>    : <Loading><ThreeDots color="#52B6FF" height={20} width={50}/></Loading>
+        }        
+        </>
     )
 }
-function HabitStatus({habitName,currentSequence,highestSequence,status,habitID }){
+
+function HabitStatus({habitName,currentSequence,highestSequence,status,habitID,loading }){
     
     const{userToken}=useContext(UserContext);
 
@@ -109,33 +117,30 @@ function HabitStatus({habitName,currentSequence,highestSequence,status,habitID }
     }
     
     return(
-
-
-            <TodayHabitBox>
-
-<SequenceBox>
-    <HabitName>{habitName}</HabitName>
-    <Sequence state={done ? true : false}> <Info>Sequência atual: </Info>{current} {current > 1 ? 'dias' : 'dia' }</Sequence>
-    <Record state={current === record && record !== 0 ? true : false}><Info>Seu recorde:</Info> {record} {record > 1 ? 'dias' : 'dia'}</Record>
-</SequenceBox>
-<CheckHabit state={done} onClick={()=>toggleStatus(habitID)}>
-    <CheckmarkSharp
-        color="#ffffff"
-        height="35px"
-        width="28px"
-    />
-</CheckHabit>
-
-
-
-</TodayHabitBox>
-
-
-
-            
+        <> {loading ?  
+        <TodayHabitBox>
+            <SequenceBox>
+                <HabitName>{habitName}</HabitName>
+                <Sequence state={done ? true : false}> <Info>Sequência atual: </Info>{current} {current > 1 ? 'dias' : 'dia' }</Sequence>
+                <Record state={current === record && record !== 0 ? true : false}><Info>Seu recorde:</Info> {record} {record > 1 ? 'dias' : 'dia'}</Record>
+            </SequenceBox>
+            <CheckHabit state={done} onClick={()=>toggleStatus(habitID)}>
+                <CheckmarkSharp
+                    color="#ffffff"
+                    height="35px"
+                    width="28px"
+                />
+            </CheckHabit>           
+        </TodayHabitBox> : <Loading><ThreeDots color="#52B6FF" height={20} width={50}/></Loading> }
+        </>          
         )
-
     }
+
+const Loading=styled.div`
+position: fixed;
+top: 300px;
+left: 158px;
+`
 
 const TodayHabitBox =styled.div`
 border: 2px solid green;
@@ -156,7 +161,8 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-overflow: hidden;
+overflow-y: auto;
+padding-top:40px;
 `
 const TodayDate=styled.div`
 border: 2px solid orangered;

@@ -242,7 +242,6 @@ flex-direction: column;
 justify-content: flex-start;
 align-items: center;
 padding-bottom: 114px;
-overflow-y: hidden;
 `
 const Warning = styled.p `
     font-family: 'Lexend Deca', sans-serif;
