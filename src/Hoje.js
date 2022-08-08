@@ -24,9 +24,10 @@ export default function Hoje(){
         );
         promise.catch(()=> console.error);           
     },[userToken, arrTodayUserHabits, setArrTodayUserHabits]);
-    
 
+    
     function concludedHabits(){
+        
         function calcPercentage () {
             const progress = arrTodayUserHabits.filter(habit => habit.done).length;
             const totalHabits = arrTodayUserHabits.length;
@@ -50,15 +51,15 @@ export default function Hoje(){
         <HojeContainer>
             {topbar}
             <TodayUserHabitsContainer>
-            {arrTodayUserHabits.map((value,index)=> 
-        <HabitStatus 
-        index={index} 
-        habitName={value.name}
-        habitID={value.id}  
-        currentSequence={value.currentSequence} 
-        highestSequence={value.highestSequence} 
-        status={value.done}
-        /> )}
+                {arrTodayUserHabits.map((value,index)=> 
+                    <HabitStatus 
+                        index={index} 
+                        habitName={value.name}
+                        habitID={value.id}  
+                        currentSequence={value.currentSequence} 
+                        highestSequence={value.highestSequence} 
+                        status={value.done}
+                    />)}
             </TodayUserHabitsContainer>
         </HojeContainer>
     )
