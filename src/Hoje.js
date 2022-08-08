@@ -152,12 +152,11 @@ padding: 10px;
 const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
 height: 400px;
-overflow-y: scroll;
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-
+overflow: hidden;
 `
 const TodayDate=styled.div`
 border: 2px solid orangered;
