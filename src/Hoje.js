@@ -200,6 +200,7 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 padding: 10px;
+height: 500px;
 `
 const Sequence =styled.p`
 font-size: 13px;

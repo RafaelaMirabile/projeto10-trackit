@@ -19,8 +19,11 @@ export default function HistoryPage(){
 }
 
 const HistoryContainer = styled.div`
-margin-top: 100px;
 padding: 10px;
+background-color: #E5E5E5;
+margin-top: 70px;
+background-color: #E5E5E5;
+height: 500px;
 `
 const Title =styled.div`
 display: flex;

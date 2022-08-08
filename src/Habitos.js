@@ -275,7 +275,7 @@ color: #126BA5;
 }
 `
 const HabitsContainer = styled.div`
-height: 470px;
+height: 500px;
 padding: 10px;
 overflow-y: hidden;
 margin-top: 70px;
