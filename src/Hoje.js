@@ -121,6 +121,10 @@ const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
 height: 400px;
 overflow-y: scroll;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 
 `
 const TodayDate=styled.div`
