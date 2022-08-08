@@ -120,12 +120,9 @@ function HabitStatus({habitName,currentSequence,highestSequence,status,habitID }
 const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
 height: 400px;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-`
+overflow-y: scroll;
 
+`
 const TodayDate=styled.div`
 border: 2px solid orangered;
 margin-bottom: 16px;
