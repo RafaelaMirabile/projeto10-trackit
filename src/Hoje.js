@@ -141,9 +141,7 @@ position: fixed;
 top: 300px;
 left: 158px;
 `
-
 const TodayHabitBox =styled.div`
-border: 2px solid green;
 margin-bottom: 14px;
 display: flex;
 justify-content: space-between;
@@ -155,7 +153,6 @@ padding: 10px;
 `
 
 const TodayUserHabitsContainer=styled.div`
-border: 2px solid yellow;
 height: 400px;
 display: flex;
 justify-content: center;
@@ -165,7 +162,6 @@ overflow-y: auto;
 padding-top:40px;
 `
 const TodayDate=styled.div`
-border: 2px solid orangered;
 margin-bottom: 16px;
 h2{
     font-family: 'Lexend Deca';
@@ -197,10 +193,9 @@ p{
 }
 
 `
-
 const HojeContainer=styled.div`
-margin-top: 100px;
-border: 2px solid red;
+margin-top: 70px;
+background-color: #E5E5E5;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
@@ -226,10 +221,8 @@ font-weight: 400;
 font-size: 19.976px;
 line-height: 25px;
 color: #666666;
-border: 2px solid purple;
 `
 const SequenceBox=styled.div`
-border: 2px solid pink;
 p{
 font-family: 'Lexend Deca';
 font-style: normal;

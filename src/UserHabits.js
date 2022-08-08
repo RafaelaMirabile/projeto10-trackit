@@ -24,7 +24,7 @@ export default function UserHabits({habit,deleteHabitFromList,index}){
      function showWeekDays(){        
         return(
             <>
-                {weekdaysList.map((weekday, index) => {
+                    {weekdaysList.map((weekday, index) => {
                     const isSelected = habit.days.some((day) => day === index);
                     return (<Weekday key={index} isSelected={isSelected}>{weekday}</Weekday>)
                 })}
@@ -45,14 +45,12 @@ export default function UserHabits({habit,deleteHabitFromList,index}){
     )
 }
 const HabitName = styled.div`
-border: 2px solid blue;
 display: flex;
 justify-content: space-between;
 width:340px;
-padding: 6px;
+padding: 10px;
 `
 const CreatedHabit= styled.div`
-border: 2px solid orange;
 margin-bottom: 10px;
 width: 340px;
 height: 91px;
@@ -60,7 +58,6 @@ background: #FFFFFF;
 border-radius: 5px;
 
 div:nth-child(2){
-border: 2px solid pink;
 display: flex;
 }
 

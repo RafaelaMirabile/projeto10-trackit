@@ -37,7 +37,7 @@ function calcPercentage () {
 }
 
 const Progressbar = styled.div`
-    margin-bottom: 60px;
+    margin-bottom: 110px;
     height: 90px;
     width: 90px;
     display: flex;
@@ -69,7 +69,7 @@ const FooterContainer=styled.div`
     justify-content: center;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    height: 70px;
+    height: 100px;
     background-color: #FFFFFF;
 `
 const Content = styled.div `
@@ -77,7 +77,6 @@ const Content = styled.div `
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    max-width: 600px;
 `
 const NavbarLink = styled(Link) `
     font-family: 'Lexend Deca', sans-serif;

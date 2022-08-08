@@ -6,11 +6,11 @@ import UserContext from "./UserContext"
 import { ThreeDots } from "react-loader-spinner";
 import Day from "./Day"
 
-
 export default function Habitos(){
 
     const{userToken} = useContext(UserContext);
-    
+
+    const [loading, setLoading]= useState(false);
     const[showElementCreateHabit, setShowElementCreateHabit]= useState(true);
     const [arrUserHabits, setArrUserHabits]= useState([]);
     const [isSaveButtonClicked, setIsSaveButtonClicked] = useState(true);
@@ -34,6 +34,7 @@ export default function Habitos(){
 
         promise.then(({data})=>{
             setArrUserHabits(data);
+            setLoading(true);
         })
     },[])
 
@@ -74,7 +75,6 @@ export default function Habitos(){
         })
         
     }
- 
     
     function deleteHabitFromList(position){
         setArrUserHabits([...arrUserHabits].filter((habit,index)=> position !== index));
@@ -152,32 +152,41 @@ export default function Habitos(){
      const actions = showActions();
 
 
-    return(         
-            <HabitsContainer>
-                <CreateHabit>
-                <p>Meus hábitos</p>
-                <AddHabits onClick={()=> setShowElementCreateHabit(!showElementCreateHabit)}><span>+</span></AddHabits>  
-                </CreateHabit>
-                {showElementCreateHabit ? 
-                    <CreatingBox onSubmit={addHabit}>
-                        {inputFildes}
-                        {actions}
-                    </CreatingBox> : " " }                   
-                <UserHabitList>
-                   {userHabitList}
-                   {arrUserHabits.length === 0 ? <Warning>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Warning> : ''}                 
-                </UserHabitList>
-            </HabitsContainer>
+    return(           
+        <>
+                {loading ?             
+                <HabitsContainer>
+                    <CreateHabit>
+                        <p>Meus hábitos</p>
+                        <AddHabits onClick={()=> setShowElementCreateHabit(!showElementCreateHabit)}><span>+</span></AddHabits>  
+                    </CreateHabit>
+                        {showElementCreateHabit ? 
+                            <CreatingBox onSubmit={addHabit}>
+                                {inputFildes}
+                                {actions}
+                            </CreatingBox> : " " }                   
+                    <UserHabitList>
+                        {userHabitList}
+                        {arrUserHabits.length === 0 ? <Warning>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Warning> : ''}                 
+                    </UserHabitList>
+                </HabitsContainer> : <Loading><ThreeDots color="#52B6FF" height={20} width={50}/></Loading>}
+                
+        </>
     )
 }
 
-
+const Loading=styled.div`
+position: fixed;
+top: 300px;
+left: 158px;
+`
 const CreatingBox = styled.form`
-border: 2px solid red;
 margin-bottom: 20px;
+background-color: #FFFFFF;
+border-radius: 5px;
+padding: 10px;
 `
 const Days=styled.div`
-border: 2px solid brown;
 display: flex;
 `
 const Actions=styled.div`
@@ -201,6 +210,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 border: none;
+margin-top: 8px;
 `
 
 const Cancelar=styled.span`
@@ -230,12 +240,10 @@ margin-bottom: 10px;
 `
 
 const WeekdaysList=styled.div`
-border: 2px solid green;
 display: flex;
 flex-direction: column;
 `
 const UserHabitList = styled.div`
-border: 2px solid purple;
 height: 330px;
 display: flex;
 flex-direction: column;
@@ -252,7 +260,6 @@ const Warning = styled.p `
 
 
 const CreateHabit =styled.div`
-border: 2px solid black;
 display: flex;
 justify-content: space-between;
 margin-bottom: 16px;
@@ -268,11 +275,11 @@ color: #126BA5;
 }
 `
 const HabitsContainer = styled.div`
-border: 2px solid green;
-margin-top: 100px;
 height: 470px;
 padding: 10px;
 overflow-y: hidden;
+margin-top: 70px;
+background-color: #E5E5E5;
 `
 const AddHabits =styled.button`
 width: 40px;

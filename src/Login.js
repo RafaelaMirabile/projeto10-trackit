@@ -32,6 +32,8 @@ export default function Login(){
            const {image, token}= data;
            setUserProfilePicture(image);
            setUserToken(token);
+           setUserEmail('');
+           setUserPassword('');
            navigate('/habitos');
            
         }
@@ -49,8 +51,8 @@ export default function Login(){
         if(InputDisable){
             return(
                 <Forms disabled>
-                    <input placeholder="email" type="text" required value={email} ></input>
-                    <input  placeholder="senha" type="text" required value={password}></input>
+                    <input placeholder="email" type="password" required value={email} ></input>
+                    <input  placeholder="senha" type="password" required value={password}></input>
                     <button><ThreeDots color="#FFFFFF" height={20} width={50}/></button>
                 </Forms>
                 )
