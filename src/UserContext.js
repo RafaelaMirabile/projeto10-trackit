@@ -21,6 +21,7 @@ export function UserContextProvider({children}){
 
     const progress = arrTodayUserHabits.filter(habit => habit.done).length;
     const totalHabits = arrTodayUserHabits.length;
+    console.log(totalHabits);
     let calcPercentage =(progress/totalHabits)*100;
     let newcalPercentage = calcPercentage.toFixed(0);
 

@@ -9,7 +9,6 @@ import UserContext from "../UserContext"
 export default function Footer(){
 const{newcalPercentage}= useContext(UserContext);
 
-console.log(newcalPercentage);
     return(       
         <FooterContainer>
             <Content>
@@ -20,7 +19,7 @@ console.log(newcalPercentage);
                             background={true} 
                             backgroundPadding={6}   
                             text="Hoje"
-                            value= {newcalPercentage}
+                            value={newcalPercentage}
                         />
                     </Progressbar>               
                 </NavbarLink>
@@ -31,7 +30,7 @@ console.log(newcalPercentage);
 }
 
 const Progressbar = styled.div`
-    margin-bottom: 100px;
+    margin-bottom: 60px;
     height: 90px;
     width: 90px;
     display: flex;

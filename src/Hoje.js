@@ -9,9 +9,9 @@ import axios from "axios";
 
 export default function Hoje(){
 
-    const{userToken, arrTodayUserHabits, setArrTodayUserHabits}=useContext(UserContext);
+    const{userToken, arrTodayUserHabits, setArrTodayUserHabits, newcalPercentage}=useContext(UserContext);
     const currentDate =dayjs().locale('pt-br').format("dddd, D/MM");
-        
+
     useEffect(()=>{
     
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today",{
@@ -31,6 +31,9 @@ export default function Hoje(){
 
             <TodayDate>
                 <h2>{currentDate.charAt(0).toUpperCase() + currentDate.slice(1)}</h2>
+                <span>{newcalPercentage == 0 ? 'Nenhum hábito concluído ainda' :(
+                    <p> {newcalPercentage}% dos hábitos concluídos</p> 
+                )}</span>
             </TodayDate>
 
         )
@@ -117,12 +120,15 @@ function HabitStatus({habitName,currentSequence,highestSequence,status,habitID }
 const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
 height: 400px;
-overflow-y: scroll;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
 `
 
 const TodayDate=styled.div`
 border: 2px solid orangered;
-margin-bottom: 26px;
+margin-bottom: 16px;
 h2{
     font-family: 'Lexend Deca';
     font-style: normal;
@@ -130,6 +136,24 @@ h2{
     font-size: 22.976px;
     line-height: 29px;
     color: #126BA5;
+}
+span{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #BABABA;
+    margin-top:2px;
+}
+p{
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #8FC549;
+    margin-top:2px;
 }
 `
 const HojeContainer=styled.div`

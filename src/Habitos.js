@@ -236,8 +236,7 @@ flex-direction: column;
 `
 const UserHabitList = styled.div`
 border: 2px solid purple;
-max-height: 330px;
-overflow-y: scroll;
+height: 330px;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
@@ -252,10 +251,10 @@ const Warning = styled.p `
 
 
 const CreateHabit =styled.div`
-border: 2px solid purple;
+border: 2px solid black;
 display: flex;
 justify-content: space-between;
-margin-bottom: 26px;
+margin-bottom: 16px;
 width: 100%;
 
 p{
@@ -270,8 +269,9 @@ color: #126BA5;
 const HabitsContainer = styled.div`
 border: 2px solid green;
 margin-top: 100px;
-height: 430px;
+height: 470px;
 padding: 10px;
+overflow-y: hidden;
 `
 const AddHabits =styled.button`
 width: 40px;
