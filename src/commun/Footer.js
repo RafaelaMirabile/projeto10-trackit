@@ -7,8 +7,14 @@ import UserContext from "../UserContext"
 
 
 export default function Footer(){
-const{newcalPercentage}= useContext(UserContext);
+const{newcalPercentage,arrTodayUserHabits}= useContext(UserContext);
 
+function calcPercentage () {
+    const progress = arrTodayUserHabits.filter(habit => habit.done).length;
+    const totalHabits = arrTodayUserHabits.length;
+
+    return ((progress/totalHabits) * 100).toFixed(0);
+}
     return(       
         <FooterContainer>
             <Content>
@@ -19,7 +25,7 @@ const{newcalPercentage}= useContext(UserContext);
                             background={true} 
                             backgroundPadding={6}   
                             text="Hoje"
-                            value={newcalPercentage}
+                            value={arrTodayUserHabits.length !== 0 ? calcPercentage() : '0'}
                         />
                     </Progressbar>               
                 </NavbarLink>

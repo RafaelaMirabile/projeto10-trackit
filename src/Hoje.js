@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function Hoje(){
 
-    const{userToken, arrTodayUserHabits, setArrTodayUserHabits, newcalPercentage}=useContext(UserContext);
+    const{userToken, arrTodayUserHabits, setArrTodayUserHabits}=useContext(UserContext);
     const currentDate =dayjs().locale('pt-br').format("dddd, D/MM");
 
     useEffect(()=>{
@@ -27,15 +27,20 @@ export default function Hoje(){
     
 
     function concludedHabits(){
+        function calcPercentage () {
+            const progress = arrTodayUserHabits.filter(habit => habit.done).length;
+            const totalHabits = arrTodayUserHabits.length;
+        
+            return ((progress/totalHabits) * 100).toFixed(0);
+        }
         return(
-
             <TodayDate>
                 <h2>{currentDate.charAt(0).toUpperCase() + currentDate.slice(1)}</h2>
-                <span>{newcalPercentage == 0 ? 'Nenhum hábito concluído ainda' :(
-                    <p> {newcalPercentage}% dos hábitos concluídos</p> 
-                )}</span>
+                <State>
+                {arrTodayUserHabits.filter(habit => habit.done).length === 0 ?<span>Nenhum hábito concluído ainda</span>  :
+                <p>{calcPercentage()}% dos hábitos concluídos</p>}
+                </State>              
             </TodayDate>
-
         )
     }
 
@@ -125,7 +130,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-padding-bottom: 114px;
 `
 const TodayDate=styled.div`
 border: 2px solid orangered;
@@ -138,6 +142,8 @@ h2{
     line-height: 29px;
     color: #126BA5;
 }
+`
+const State =styled.div`
 span{
     font-family: 'Lexend Deca';
     font-style: normal;
@@ -156,7 +162,10 @@ p{
     color: #8FC549;
     margin-top:2px;
 }
+
 `
+
+
 const HojeContainer=styled.div`
 margin-top: 100px;
 border: 2px solid red;
