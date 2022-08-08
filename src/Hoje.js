@@ -151,7 +151,7 @@ padding: 10px;
 
 const TodayUserHabitsContainer=styled.div`
 border: 2px solid yellow;
-min-height: 400px;
+height: 400px;
 overflow-y: scroll;
 display: flex;
 justify-content: center;
