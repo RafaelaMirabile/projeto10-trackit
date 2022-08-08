@@ -1,15 +1,12 @@
 import { useState,createContext } from "react";
 
-
 const UserContext = createContext();
-
 
 export function UserContextProvider({children}){
 
-
     const [userToken, setUserToken] = useState("");
     const [userProfilePicture, setUserProfilePicture] = useState("");
-   
+    const [arrTodayUserHabits, setArrTodayUserHabits]= useState([]);
 
     const locallyStoredToken = localStorage.getItem("token");
     const locallyStoredProfilePicture = localStorage.getItem("picture");
@@ -22,9 +19,13 @@ export function UserContextProvider({children}){
         setUserProfilePicture(locallyStoredProfilePicture);
     }
 
+    const progress = arrTodayUserHabits.filter(habit => habit.done).length;
+    const totalHabits = arrTodayUserHabits.length;
+    let calcPercentage =(progress/totalHabits)*100;
+    let newcalPercentage = calcPercentage.toFixed(0);
 
     return(
-        <UserContext.Provider value={{userToken, userProfilePicture, setUserToken, setUserProfilePicture, }}>
+        <UserContext.Provider value={{userToken, userProfilePicture, setUserToken, setUserProfilePicture,arrTodayUserHabits, setArrTodayUserHabits,newcalPercentage}}>
         { children }
         </UserContext.Provider>
     )

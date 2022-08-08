@@ -7,22 +7,22 @@ import UserContext from "../UserContext"
 
 
 export default function Footer(){
+const{newcalPercentage}= useContext(UserContext);
 
-
-
+console.log(newcalPercentage);
     return(       
         <FooterContainer>
             <Content>
                 <NavbarLink to="/habitos">Hábitos</NavbarLink>
                 <NavbarLink to="/hoje">
-                <Progressbar>
-                            <CircularProgressbar 
+                    <Progressbar>
+                        <CircularProgressbar 
                             background={true} 
                             backgroundPadding={6}   
                             text="Hoje"
-                           />
-                </Progressbar>
-               
+                            value= {newcalPercentage}
+                        />
+                    </Progressbar>               
                 </NavbarLink>
                 <NavbarLink to="/historico">Histórico</NavbarLink>
             </Content>
@@ -53,11 +53,6 @@ const Progressbar = styled.div`
     }
 
 `
-
-
-
-
-
 const FooterContainer=styled.div`
     position: fixed;
     bottom: 0;
@@ -78,7 +73,6 @@ const Content = styled.div `
     width: 100%;
     max-width: 600px;
 `
-
 const NavbarLink = styled(Link) `
     font-family: 'Lexend Deca', sans-serif;
     font-size: 18px;
